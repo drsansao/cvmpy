@@ -1,28 +1,33 @@
 # CVM Data Reader
 
-## Introduction
-The **CVM Data Processor** project provides tools to read and process datasets from the **Comissão de Valores Mobiliários (CVM)**, including:
+## Overview
+The **CVM Data Reader** is a powerful tool designed to read and process datasets from the **Comissão de Valores Mobiliários (CVM)**. It simplifies access to financial information, making it easier for users to conduct research and financial analysis. The project supports the following data categories:
+
 - **Fundos de Investimento (FI)**: Informe Diário, Composição e Diversificação de Aplicações.
-- **Companhias**: ITR (Quarterly Information), DFP (Financial Statements), among others.
+- **Companhias**: ITR (Quarterly Information), DFP (Financial Statements), and more.
+
+---
 
 ## Installation
 
-Clone the repository:
+To get started, follow these steps:
+
+1. **Clone the Repository:**
 
 ```bash
-git clone https://github.com/username/cvm-data-processor.git
-cd cvm-data-processor
+git clone https://github.com/username/cvm.git
+cd cvm
 ```
 
-Create a virtual environment and activate it:
+2. **Set Up Virtual Environment:**
 
 ```bash
 python -m venv venv
 source venv/bin/activate  # Linux/Mac
-venv\Scripts\activate  # Windows
+venv\\Scripts\\activate  # Windows
 ```
 
-Install dependencies:
+3. **Install Dependencies:**
 
 ```bash
 pip install -r requirements.txt
@@ -32,28 +37,85 @@ pip install -r requirements.txt
 
 ## Usage
 
-### Example: Processing Investment Fund Data
+### **Example: Fetching FI Static and Historical Data**
 
-For fetching historical data, we use fetch_historical_data() method.
-For fetching static data, we use fetch_static_data() method. 
+To fetch data, you can use the following methods:
+- `fetch_historical_data(dataset_name, start_date, end_date)` for panel datasets.
+- `fetch_static_data(dataset_name)` for static datasets.
 
-Availables datasets are:
-    cadastro, extrato, registro_fundo_classe, informe_diario, composicao_diversificacao, balancete, perfil_mensal 
+#### **Available Datasets**
+
+- `cadastro` (registration)
+- `extrato` (statement)
+- `registro_fundo_classe` (fund class registration)
+- `informe_diario` (daily report)
+- `composicao_diversificacao` (composition and diversification)
+- `balancete` (trial balance)
+- `perfil_mensal` (monthly profile)
 
 ```python
 import cvm
 
-# Instance FI datasets
-fi = FI()
+# Create an instance of FI datasets
+fi = cvm.FI()
 
-# Load data
+# Fetch static data (e.g., cadastro)
 fi.fetch_static_data("cadastro")
+
+# Fetch historical data (e.g., informe_diario)
 fi.fetch_historical_data("informe_diario", "2024-11-05", "2024-12-23")
 ```
 
-Datasets will be attributes of the FI instance.
+The fetched datasets become attributes of the `FI` instance. For example:
 
 ```python
-fi.informe_diario.inf_diario_fi.head()
+# Display the first few rows of Informe Diário data
+print(fi.informe_diario.inf_diario_fi.head())
 ```
+
 ![Informe Diário Example](docs/inf_diario.png)
+
+#### **Handling Large Data with Parsers**
+
+For long historical data, memory issues may arise. In such cases, you can apply a parser function to filter data as it is being read. Here’s an example of filtering by specific CNPJs:
+
+```python
+list_cnpjs = [
+    "37.916.879/0001-26",  # DYNAMO COUGAR MASTER FIA
+    "11.188.572/0001-62",  # ATMOS MASTER FIA
+    "06.964.937/0001-63",  # OPPORTUNITY SELECTION MASTER FIA
+]
+
+# Fetch data with a parser function to filter by CNPJ
+fi.fetch_historical_data(
+    "composicao_diversificacao",
+    "2024-01-31",
+    "2024-03-31",
+    parser=lambda df: (
+        df[df["CNPJ_FUNDO_CLASSE"].isin(list_cnpjs)]
+        if "CNPJ_FUNDO_CLASSE" in df.columns
+        else df
+    ),
+)
+```
+In this example, only the specified CNPJs are retained in the dataset.
+
+---
+
+## Contributing
+We welcome contributions! To contribute:
+1. Fork the repository.
+2. Create a new branch: `git checkout -b feature/your-feature-name`.
+3. Commit changes: `git commit -m "Add your feature"`.
+4. Push to your branch: `git push origin feature/your-feature-name`.
+5. Open a pull request.
+
+---
+
+## License
+This project is licensed under the MIT License. See the `LICENSE` file for details.
+
+---
+
+## Contact
+If you encounter issues or have feedback, feel free to open an issue or reach out via the repository’s discussions tab.
