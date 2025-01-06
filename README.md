@@ -34,12 +34,26 @@ pip install -r requirements.txt
 
 ### Example: Processing Investment Fund Data
 
+For fetching historical data, we use fetch_historical_data() method.
+For fetching static data, we use fetch_static_data() method. 
+
+Availables datasets are:
+    cadastro, extrato, registro_fundo_classe, informe_diario, composicao_diversificacao, balancete, perfil_mensal 
+
 ```python
 import cvm
 
 # Instance FI datasets
 fi = FI()
 
-Load historical data
+# Load data
+fi.fetch_static_data("cadastro")
 fi.fetch_historical_data("informe_diario", "2024-11-05", "2024-12-23")
 ```
+
+Datasets will be attributes of the FI instance.
+
+```python
+fi.informe_diario.inf_diario_fi.head()
+```
+![Informe Diário Example](docs/inf_diario.png)
