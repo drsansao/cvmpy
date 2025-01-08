@@ -1,7 +1,7 @@
-# CVM Data Reader
+# cvmpy
 
 ## Overview
-The **CVM Data Reader** is a powerful tool designed to read and process datasets from the **Comissão de Valores Mobiliários (CVM)**. It simplifies access to financial information, making it easier for users to conduct research and financial analysis. The project supports the following data categories:
+The **cvmpy** is a tool designed to read and process datasets from the **Comissão de Valores Mobiliários (CVM)**. It simplifies access to financial information, making it easier for users to conduct research and financial analysis. The project supports the following data categories:
 
 - **Companhias**: ITR (Quarterly Information), DFP (Financial Statements), and more.
 - **Fundos de Investimento (FI)**: Informe Diário, Composição e Diversificação de Aplicações.
@@ -14,7 +14,7 @@ The **CVM Data Reader** is a powerful tool designed to read and process datasets
 To install the package via `pip`, run the following command:
 
 ```bash
-pip install cvm
+pip install cvmpy
 ```
 
 
@@ -23,8 +23,13 @@ pip install cvm
 ### **Example: Fetching FI Static and Historical Data**
 
 To fetch data, you can use the following methods:
-- `fetch_historical_data(dataset_name, start_date, end_date)` for panel datasets.
-- `fetch_static_data(dataset_name)` for static datasets.
+
+- For panel datasets:
+`fetch_historical_data(dataset_name, start_date, end_date)`
+
+- For static datasets:
+
+`fetch_static_data(dataset_name)`
 
 #### **Available Datasets**
 
@@ -37,10 +42,10 @@ To fetch data, you can use the following methods:
 - `perfil_mensal` (monthly profile)
 
 ```python
-import cvm
+import cvmpy
 
 # Create an instance of FI datasets
-fi = cvm.FI()
+fi = cvmpy.FI()
 
 # Fetch static data (e.g., cadastro)
 fi.fetch_static_data("cadastro")
@@ -55,8 +60,6 @@ The fetched datasets become attributes of the `FI` instance. For example:
 # Display the first few rows of Informe Diário data
 print(fi.informe_diario.inf_diario_fi.head())
 ```
-
-![Informe Diário Example](docs/inf_diario.png)
 
 #### **Handling Large Data with Parsers**
 

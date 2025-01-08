@@ -1,12 +1,15 @@
 from setuptools import setup, find_packages
 
+with open("README.md", "r", encoding="utf-8") as f:
+    long_description = f.read()
+
 setup(
     name="cvmpy",
     version="0.1.0",
     author="Douglas Ricardo Sansao",
     author_email="douglasrsansao@example.com",
     description="Package to read and process data from the CVM website.",
-    long_description=open("README.md").read(),
+    long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/drsansao/cvm",
     packages=find_packages(),
