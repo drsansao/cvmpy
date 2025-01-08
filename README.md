@@ -25,6 +25,7 @@ pip install cvmpy
 To fetch data, you can use the following methods:
 
 - For panel datasets:
+
 `fetch_historical_data(dataset_name, start_date, end_date)`
 
 - For static datasets:
