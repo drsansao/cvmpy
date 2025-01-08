@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="cvm",
+    name="cvmpy",
     version="0.1.0",
     author="Douglas Ricardo Sansao",
     author_email="douglasrsansao@example.com",
