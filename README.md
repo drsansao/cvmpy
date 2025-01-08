@@ -3,37 +3,20 @@
 ## Overview
 The **CVM Data Reader** is a powerful tool designed to read and process datasets from the **Comissão de Valores Mobiliários (CVM)**. It simplifies access to financial information, making it easier for users to conduct research and financial analysis. The project supports the following data categories:
 
-- **Fundos de Investimento (FI)**: Informe Diário, Composição e Diversificação de Aplicações.
 - **Companhias**: ITR (Quarterly Information), DFP (Financial Statements), and more.
+- **Fundos de Investimento (FI)**: Informe Diário, Composição e Diversificação de Aplicações.
+- **Fundos de Investimento (FII)**: Demonstrações Financeiras, Informe Mensal, and more.
 
 ---
 
 ## Installation
 
-To get started, follow these steps:
-
-1. **Clone the Repository:**
+To install the package via `pip`, run the following command:
 
 ```bash
-git clone https://github.com/username/cvm.git
-cd cvm
+pip install cvm
 ```
 
-2. **Set Up Virtual Environment:**
-
-```bash
-python -m venv venv
-source venv/bin/activate  # Linux/Mac
-venv\\Scripts\\activate  # Windows
-```
-
-3. **Install Dependencies:**
-
-```bash
-pip install -r requirements.txt
-```
-
----
 
 ## Usage
 

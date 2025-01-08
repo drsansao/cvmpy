@@ -1,14 +1,14 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="cvm-data",
+    name="cvm",
     version="0.1.0",
     author="Douglas Ricardo Sansao",
     author_email="douglasrsansao@example.com",
-    description="Package to fetch and process data from the CVM website.",
+    description="Package to read and process data from the CVM website.",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
-    url="https://github.com/drsansao/cvm-data",
+    url="https://github.com/drsansao/cvm",
     packages=find_packages(),
     install_requires=[
         "pandas>=2.2.3",
