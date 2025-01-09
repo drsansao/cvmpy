@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as f:
 
 setup(
     name="cvmpy",
-    version="0.1.2",
+    version="0.1.3",
     author="Douglas Ricardo Sansao",
     author_email="douglasrsansao@example.com",
     description="Package to read and process data from the CVM website.",
